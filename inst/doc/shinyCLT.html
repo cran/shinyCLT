@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Using the Central Limit Theorem Shiny Application</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Using the Central Limit Theorem Shiny
+Application</h1>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The <code>CLT()</code> function in the <code>shinyCLT</code> package
+launches an interactive Shiny application that demonstrates the Central
+Limit Theorem (CLT). This application provides an educational tool
+through interactive visualisations of statistical principles.</p>
+</div>
+<div id="function-parameters" class="section level2">
+<h2>Function Parameters</h2>
+<p>The <code>CLT</code> function comes with the following
+parameters:</p>
+<ul>
+<li><p><strong><code>n.cores</code></strong>: Specifies the number of
+CPU cores allocated for the app’s calculations. By default
+(<code>n.cores = NULL</code>), the function will automatically use half
+of the available cores on your machine, rounded up to the nearest whole
+number.</p></li>
+<li><p><strong><code>mode</code></strong>: Controls the behavior of the
+application when the web browser tab or IDE preview is closed:</p>
+<ul>
+<li><code>&quot;app&quot;</code> (default): The Shiny application stops running
+when the browser tab is closed.</li>
+<li><code>&quot;server&quot;</code>: The Shiny application continues running in
+the background, even after the browser tab is closed.</li>
+</ul></li>
+<li><p><strong><code>user_plan</code></strong>: Defines the
+parallelization strategy used for running the application. Acceptable
+values include:</p>
+<ul>
+<li><code>&quot;cluster&quot;</code>: Distributes tasks across multiple machines
+or R sessions, suitable for larger, distributed systems.</li>
+<li><code>&quot;multicore&quot;</code>: Utilises CPU cores on the current machine
+for parallel processing, best for systems that support forking.</li>
+<li><code>&quot;multisession&quot;</code>: Runs tasks in separate R sessions,
+allowing parallel processing on systems where forking is not
+possible.</li>
+</ul>
+<p>The performance of each plan varies depending on the operating system
+and computer specifications. Based on our experience:</p>
+<ul>
+<li><code>&quot;cluster&quot;</code> is optimal for Windows machines.</li>
+<li><code>&quot;multicore&quot;</code> is optimal for Linux machines.</li>
+<li><code>&quot;multisession&quot;</code> is optimal for macOS (OSX)
+machines.</li>
+</ul></li>
+</ul>
+</div>
+<div id="usage" class="section level2">
+<h2>Usage</h2>
+<div id="example-1-default-settings" class="section level3">
+<h3>Example 1: Default Settings</h3>
+<p>In the default mode, the application uses half of the available cores
+and stops running when the browser tab is closed:</p>
+<pre><code>library(shinyCLT)
+# Launch the Central Limit Theorem Shiny application
+CLT()</code></pre>
+</div>
+<div id="example-2-custom-number-of-cores-and-server-mode" class="section level3">
+<h3>Example 2: Custom Number of Cores and Server Mode</h3>
+<p>You can specify the number of cores to use and keep the application
+running in the background by setting <code>mode = &quot;server&quot;</code>:</p>
+<pre><code># Launch the app using 4 cores and keep it running in the background
+CLT(n.cores = 4, mode = &quot;server&quot;)</code></pre>
+</div>
+</div>
+<div id="considerations" class="section level2">
+<h2>Considerations</h2>
+<div id="long-computations" class="section level3">
+<h3>Long Computations</h3>
+<p>The application may involve long-running computations, particularly
+with large datasets or high number of simulated samples. Utilising
+multiple cores can expedite these operations, but it may also lead to
+high CPU usage, potentially affecting the performance of other
+applications.</p>
+</div>
+<div id="resource-management" class="section level3">
+<h3>Resource Management</h3>
+<p>When specifying <code>&quot;n.cores&quot;</code>, be careful about system
+resource usage. Allocating too many cores to the Shiny application could
+slow down other processes on your machine.</p>
+</div>
+<div id="persistent-sessions" class="section level3">
+<h3>Persistent Sessions</h3>
+<p>In <code>&quot;server&quot;</code> mode, the Shiny application will continue to
+run even after the browser is closed. While this can be beneficial for
+long-running sessions, it requires manual intervention to stop the
+application, which can lead to unintended resource consumption if
+forgotten.</p>
+</div>
+<div id="reactivity-and-performance" class="section level3">
+<h3>Reactivity and Performance</h3>
+<p>This Shiny application is fully reactive, meaning that every time you
+interact with the UI - such as moving a slider, switching tabs, or
+changing the type of distribution - the underlying distribution
+simulations are recalculated. These calculations are performed
+sequentially, so each action you take triggers a new calculation that
+must be completed before the next one can start.</p>
+<p>This reactivity ensures that the visualisations are always up to
+date, but it also means that you may experience delays, particularly if
+the calculations are complex or if you’re running the application on a
+limited number of CPU cores. In some situations, depending on the size
+of the dataset and the complexity of the simulation, these delays can
+become significant, requiring you to wait until all computations have
+finished before you can continue interacting with the UI.</p>
+<p>This behaviour highlights the importance of optimising the
+application settings according to the capabilities of your system and
+the specific tasks you wish to perform.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
