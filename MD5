@@ -1,13 +1,13 @@
-8cd1a0c10af52307be2db71558b06369 *DESCRIPTION
+c6ce34c316f8b242878b0a57611deeb2 *DESCRIPTION
 d24057f5828727e40020514abdc0bcfe *NAMESPACE
-24b7aed5d2230130e6dfb92da8f6a075 *NEWS.md
+14e13d485b4af121d3f89c060cd7750b *NEWS.md
 2027373786187c5fb628a38c41fc323d *R/CLTApp.R
 3385eeb28b95d7e731add6125a0f3a97 *R/shinyCLT-package.R
 addeba005c6e1d0a0007033f5d06ad76 *README.md
 6e64e87086ec6c75344b4e82ca5c3751 *build/vignette.rds
 1a465356b644b09d1e430da9016dfa14 *inst/app/calc_func.R
 11296450178f099ba531698645e69cf3 *inst/app/global.R
-b1ba2ea73102dc502f50210e745209e7 *inst/app/plot_func.R
+e44022e4f640b289c5a2f1ecc4dcbdfb *inst/app/plot_func.R
 6be749569494cc8c6492d55624140da5 *inst/app/server.R
 5284d77a3fd0b5c34c8b260e2d4b5dc3 *inst/app/ui.R
 b095e05d67b6a779a40a9d4367ee4a4c *inst/app/www/style.css

@@ -1,6 +1,6 @@
 Package: shinyCLT
 Title: Central Limit Theorem 'shiny' Application
-Version: 0.9.3
+Version: 0.9.4
 Authors@R: c(
             person("Dominique-Laurent", "Couturier", role = c("aut", "cre"),
             email = "dominique.couturier@mrc-bsu.cam.ac.uk", 
@@ -21,11 +21,11 @@ RoxygenNote: 7.3.2.9000
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2025-01-25 09:05:53 UTC; Nikita
+Packaged: 2025-02-27 11:32:31 UTC; Nikita
 Author: Dominique-Laurent Couturier [aut, cre]
     (<https://orcid.org/0000-0001-5774-5036>),
   Nikita Mozgunov [aut] (<https://orcid.org/0000-0003-0941-718X>),
   Thomas Jaki [aut] (<https://orcid.org/0000-0002-1096-188X>)
 Maintainer: Dominique-Laurent Couturier <dominique.couturier@mrc-bsu.cam.ac.uk>
 Repository: CRAN
-Date/Publication: 2025-01-29 17:20:05 UTC
+Date/Publication: 2025-02-27 12:30:02 UTC
